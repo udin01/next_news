@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
-import LiveTimestamp from "../LiveTimestamp";
+import LiveTimestamp from "../component/LiveTimestamp";
+import Link from "next/link";
 
 type Props = {
   searchParams?: Article;
@@ -13,13 +14,14 @@ function ArticlePage({ searchParams }: Props) {
     return notFound();
   }
   const article: Article = searchParams;
+  
   return (
     <article>
       <section className="flex flex-col lg:flex-row pb-24 px:0 lg:px-10">
-        {article.image && (
+        {article.urlToImage && (
           <img
             className="h-50 max-w-md mx-auto md:max-w-lg lg:max-w-xl object-cover rounded-lg shadow-md"
-            src={article.image}
+            src={article.urlToImage}
             alt={article.title}
           />
         )}
@@ -29,12 +31,13 @@ function ArticlePage({ searchParams }: Props) {
           </h1>
           <div className="flex divide-x-2 space-x-4">
             <h2 className="font-bold">By: {article.author}</h2>
-            <h2 className="font-bold pl-4">Source: {article.source}</h2>
+            <h2 className="font-bold pl-4">Source: -</h2>
             <p className="pl-4">
-              <LiveTimestamp time={article.published_at} />
+              <LiveTimestamp time={article.publishedAt} />
             </p>
           </div>
-          <p className="pt-4">{article.description}</p>
+          {/* <p className="pt-4">{article.description}</p> */}
+          <Link href={ article.url } target="_blank">  { article.url }   </Link>
         </div>
       </section>
     </article>

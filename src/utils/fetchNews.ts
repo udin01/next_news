@@ -17,10 +17,12 @@ const fetchNews = async (
     });
 
     if(!res.ok) {
-        throw new Error('Fail fetch');
+        return [];
+    } else {
+        let res_pre = res.json();
+        return res_pre;
     }
 
-    return res.json();
 
     // console.log('===========================================================================')
     // console.log(data, category)

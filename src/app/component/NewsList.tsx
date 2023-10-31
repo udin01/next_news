@@ -5,12 +5,11 @@ type Props = {
 };
 
 function NewsList({ news }: Props) {
-  //   console.log('=======================')
-  // console.log(news)
-  // return;
+
+  news = (!news.articles) ? [] : news.articles; 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-10 gap-10">
-      {news.articles.map((article) => (
+      {news.map((article) => (
         <Article key={article.title} article={article} />
       ))}
     </div>
